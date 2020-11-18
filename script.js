@@ -4,50 +4,68 @@ let secretNum = Math.trunc(Math.random() *10) + 1;
 let score = 20;
 let highScore = 0;
 
+const domStrings = {
+  guess: document.querySelector('.guess'),
+  body: document.querySelector('body'),
+  number: document.querySelector('.number'),
+  highscore: document.querySelector('.highscore'),
+  score: document.querySelector('.score'),
+}
+
+
+const printMessage = function(message) {
+  document.querySelector('.message').textContent = message
+};
+
+
     document.querySelector('.check').addEventListener('click', function() {
-        const guess = Number(document.querySelector('.guess').value);
-        console.log(secretNum);
-        console.log(guess, typeof guess);
+        const guess = Number(domStrings.guess.value);
      
         // When there is no input
         if(!guess) {
-         document.querySelector('.message').textContent = '⛔️ No number!';
+         printMessage('⛔️ No number!');
 
-        // Player wins
+        // When player wins
         } else if(guess === secretNum) {
-             document.querySelector('.message').textContent = '🎉 Correct Number!';
-             document.querySelector('body').style.backgroundColor = '#60b347';
-             document.querySelector('.number').style.width = '30rem';
-             document.querySelector('.number').textContent = secretNum;
+          // document.querySelector('.message').textContent = '🎉 Correct Number!';
+             printMessage('🎉 Correct Number!');
+             domStrings.body.style.backgroundColor = '#60b347';
+             domStrings.number.style.width = '30rem';
+             domStrings.number.textContent = secretNum;
 
              if(score > highScore) {
                  highScore = score;
-                 document.querySelector('.highscore').textContent = highScore;
+                 domStrings.highscore.textContent = highScore;
              }
 
-        // Guess is too low
-        } else if (guess < secretNum) {
-            if(score > 1) {
-                document.querySelector('.message').textContent = '📉 Lower Number!';
-                score--;
-                document.querySelector('.score').textContent = score;
-            } else {
-                document.querySelector('.message').textContent = '❌ You Lose!';
-                document.querySelector('.score').textContent = 0;
-            }
-        
-        // Guess is to heigh
-        } else if(guess > secretNum) {
-            if(score > 1) {
-                document.querySelector('.message').textContent = '📈 Heigher Number!';
-                score--;
-                document.querySelector('.score').textContent = score;
-            } else {
-                document.querySelector('.message').textContent = '❌ You Lose!';
-                document.querySelector('.score').textContent = 0;
-            }
+        // Guess the correct number
+        } else if (guess !== secretNum) {
+          printMessage(guess > secretNum ? '📈 Heigher Number!' : '📉 Lower Number!');
+          score--;
+          domStrings.score.textContent = score;
         }
-     })
+        // else if (guess < secretNum) {
+        //     if(score > 1) {
+        //         domStrings.message.textContent = '📉 Lower Number!';
+        //         score--;
+        //         domStrings.score.textContent = score;
+        //     } else {
+        //         domStrings.message.textContent = '❌ You Lose!';
+        //         domStrings.score.textContent = 0;
+        //     }
+        
+        // // Guess is to heigh
+        // } else if(guess > secretNum) {
+        //     if(score > 1) {
+        //         domStrings.message.textContent = '📈 Heigher Number!';
+        //         score--;
+        //         domStrings.score.textContent = score;
+        //     }
+             else {
+                printMessage('❌ You Lose!');
+                domStrings.score.textContent = 0;
+            }
+        })
 
 
 // Restart the game via the again button
@@ -55,13 +73,13 @@ document.querySelector('.again').addEventListener('click', function() {
     // Restore all values to initial
     score = 20
     secretNum = Math.trunc(Math.random() *10) + 1;
-    document.querySelector('.number').textContent = '?';
-    document.querySelector('.number').value = secretNum;
-    document.querySelector('.number').style.width = '15rem';
-    document.querySelector('.message').textContent = 'Start guessing...';
-    document.querySelector('.score').textContent = score;
-    document.querySelector('body').style.backgroundColor = '#222';
-    document.querySelector('.guess').value = '';
+    domStrings.number.textContent = '?';
+    domStrings.number.value = secretNum;
+    domStrings.number.style.width = '15rem';
+    printMessage('Start guessing...');
+    domStrings.score.textContent = score;
+    domStrings.body.style.backgroundColor = '#222';
+    domStrings.guess.value = '';
 })
 
 
