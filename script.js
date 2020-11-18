@@ -1,7 +1,6 @@
 'use strict';
 
-let number = Math.trunc(Math.random() *10) + 1;
-const secretNum = document.querySelector('.number').value = number;
+let secretNum = Math.trunc(Math.random() *10) + 1;
 let score = 20;
 
     document.querySelector('.check').addEventListener('click', function() {
@@ -18,7 +17,7 @@ let score = 20;
              document.querySelector('.message').textContent = '🎉 Correct Number!';
              document.querySelector('body').style.backgroundColor = '#60b347';
              document.querySelector('.number').style.width = '30rem';
-             document.querySelector('.number').textContent = number;
+             document.querySelector('.number').textContent = secretNum;
 
 
         // Guess is too low
@@ -46,5 +45,18 @@ let score = 20;
      })
 
 
+// Restart the game via the again button
+document.querySelector('.again').addEventListener('click', function() {
+    // Restore all values to initial
+    score = 20
+    secretNum = Math.trunc(Math.random() *10) + 1;
+    document.querySelector('.number').textContent = '?';
+    document.querySelector('.number').value = secretNum;
+    document.querySelector('.number').style.width = '15rem';
+    document.querySelector('.message').textContent = 'Start guessing...';
+    document.querySelector('.score').textContent = score;
+    document.querySelector('body').style.backgroundColor = '#222';
+    document.querySelector('.guess').value = '';
+})
 
 
