@@ -18,7 +18,7 @@ let score = 20;
              document.querySelector('.message').textContent = '🎉 Correct Number!';
              document.querySelector('body').style.backgroundColor = '#60b347';
              document.querySelector('.number').style.width = '30rem';
-             secretNum = document.querySelector('.number').textContent = number;
+             document.querySelector('.number').textContent = number;
 
 
         // Guess is too low
