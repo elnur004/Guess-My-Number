@@ -71,7 +71,6 @@ const checkNumber = function() {
 const keyDownEvt = function(el) {
   if(el.key === 'Enter') {
     checkNumber();
-    console.log(el);
   }
 }
 
