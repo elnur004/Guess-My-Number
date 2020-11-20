@@ -10,7 +10,7 @@ const domStrings = {
   number: document.querySelector('.number'),
   highscore: document.querySelector('.highscore'),
   score: document.querySelector('.score'),
-}
+};
 
 
 const printMessage = function(message) {
@@ -18,8 +18,8 @@ const printMessage = function(message) {
 };
 
 
-    document.querySelector('.check').addEventListener('click', function() {
-        const guess = Number(domStrings.guess.value);
+const checkNumber = function() {
+  const guess = Number(domStrings.guess.value);
      
         // When there is no input
         if(!guess) {
@@ -65,7 +65,20 @@ const printMessage = function(message) {
                 printMessage('❌ You Lose!');
                 domStrings.score.textContent = 0;
             }
-        })
+}
+
+// Callback for Enter key
+const keyDownEvt = function(el) {
+  if(el.key === 'Enter') {
+    checkNumber();
+    console.log(el);
+  }
+}
+
+// for pressing the ENTER key
+document.addEventListener('keydown', keyDownEvt);
+
+document.querySelector('.check').addEventListener('click',  checkNumber);
 
 
 // Restart the game via the again button
